@@ -1,0 +1,24 @@
+<div class="contaner">
+    <div class="mt-4">
+        <div class="container">
+            <div class="row">
+                {{#each lights}}
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card card-course-item">
+                        <a href="/lights/{{this.slug}}">
+                            <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+                        </a>
+                        <div class="card-body">
+                            <a href="/lights/{{this.slug}}">
+                                <h5 class="card-title">{{this.name}}</h5>
+                            </a>
+                            <p class="card-text center">{{this.description}}</p>
+                            <a href="/lights/{{this.slug}}" class="btn btn-primary">View Information</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div> 
+</div>

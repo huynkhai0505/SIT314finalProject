@@ -1,0 +1,35 @@
+<div class="mt-4">
+    <div class="container">
+            <h3> Bulb Install Stimulation </h3>
+                <form class='content' method="POST" action="/lights/store">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea type="text" class="form-control" id="description" name="description"> </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="videoId">Video ID</label>
+                        <input type="text" class="form-control" id="videoId" name="videoId">
+                    </div>
+                    <div class="form-group">
+                        <label for="level">Building Level</label>
+                        <input type="text" class="form-control" id="buildingLevel" name="buildingLevel">
+                    </div>
+                    <div class="form-group">
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1">Light Status</label>
+                            <span class="oi oi-lightbulb"></span>
+                            <select class="form-control" id="Status" name="Status">>
+                                <option value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add Bulb</button>
+                </form>
+    </div>
+</div>

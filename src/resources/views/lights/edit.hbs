@@ -1,0 +1,38 @@
+<div class="mt-4">
+    <div class="container">
+            <h3> Bulb Adjustment </h3>
+                <form class='mt-4 content' method="POST" action="/lights/{{light._id}}?_method=PUT">
+                    <div class="form-group">
+                        <label for="name">Bulb Name</label>
+                        <span class="oi oi-lightbulb"></span>
+                        <input type="text" class="form-control"  value="{{light.name}}" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description">{{light.description}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="videoId">Video ID</label>
+                        <span class="oi oi-lightbulb"></span>
+                        <input type="text" class="form-control" value="{{light.videoId}}" id="videoId" name="videoId">
+                    </div>
+                    <div class="form-group">
+                        <label for="level">Building Level</label>
+                        <span class="oi oi-lightbulb"></span>
+                        <input type="text" class="form-control" value="{{light.buildingLevel}}" id="buildingLevel" name="buildingLevel">
+                    </div>
+                    <div class="form-group">
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1">Light Status</label>
+                            <span class="oi oi-lightbulb"></span>
+                            <select class="form-control" value="{{light.Status}}" id="Status" name="Status">>
+                                <option value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+    </div>
+</div>

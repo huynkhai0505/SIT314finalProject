@@ -1,0 +1,161 @@
+<form name="container-form" method="POST" action="/lights/handle-form-actions" class="mt-4">
+    <div>
+        <h3>My Bulb</h3>
+        {{#if deletedCount}}
+        <a href="/me/trash/lights">Buld Deleted <span class="oi oi-trash"></span> {{deletedCount}}</a>  
+        {{/if}}
+    </div>
+
+    <div class="mt-4 d-flex align-items-center delete-all-action">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
+            <label class="form-check-label" for="checkbox-all">
+                Select All
+            </label>
+        </div>
+            <select class="form-control-sm form-control-sm checkbox-select-all-options" name="action" required>
+                <option value="">----Option----</option>
+                <option value="delete">Delete</option>
+                <option value="update">On</option>
+            </select>
+
+        <button class="btn btn-primary check-all-submit-btn disabled">Activate</button>
+    </div>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col" colspan="2">#</th>
+      <th scope="col">
+          Bulb Name
+          {{{sortable 'name' _sort}}}
+      </th>
+      <th scope="col">
+          Building Level
+          {{{sortable 'buildingLevel' _sort}}}
+        </th>
+      <th scope="col">
+          Installed At
+          {{{sortable 'createdAt' _sort}}}
+          </th>
+      <th scope="col">Status</th>
+      <th scope="col">Functionalities</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each lights}}
+    <tr>
+        <td>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="lightIds[]" value="{{this._id}}" id="">
+            </div>  
+        </td>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.name}}</td>
+      <td>{{this.buildingLevel}}</td>
+      <td>{{this.createdAt}}</td>
+      <td>{{this.Status}}</td>
+      <td> 
+        <a href="/lights/{{this._id}}/edit" class="btn btn-link">Adjust</a>
+        <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-light-modal"> Delete <span class="oi oi-delete"></span></a>
+      </td>
+    </tr>
+    {{else}}
+        <tr>
+            <td colspan="5" class="text-center">
+                Zero
+                <a href='/lights/create'>Create</a>
+            </td>
+        </tr>
+    {{/each}}
+  </tbody>
+</table>
+</form>
+
+{{!-- Confirm Delete light --}}
+<div id="delete-light-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button id="btn-delete-light" type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete Hidden Form --}}
+<form name="delete-light-form" method="POST"></form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var lighId;
+        var deleteForm = document.forms['delete-light-form'];
+        var btnDeletelight = document.getElementById('btn-delete-light');
+        var checkboxAll = $('#checkbox-all');
+        var lightItemCheckbox = $('input[name="lightIds[]"]');
+        var checkAllSubmitBtn = $('.check-all-submit-btn');
+        var containerForm = document.forms['container-form'];
+
+        //When confirm delete clicked
+        $('#delete-light-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            lighId = button.data('id');
+        })
+
+        btnDeletelight.onclick = function() {
+            deleteForm.action = '/lights/' + lighId + '?_method=DELETE';
+            deleteForm.submit();
+        }
+
+        //Checkbox all click
+        checkboxAll.change(function () {
+            var isCheckedAll = $(this).prop('checked');
+            //Check for select all or not
+            lightItemCheckbox.prop('checked', isCheckedAll)
+            renderCheckAllSubmitBtn() 
+        });
+
+        //lights Item Checkbox clicked
+        lightItemCheckbox.change(function () {
+            var isCheckAll = lightItemCheckbox.length === $('input[name="lightIds[]"]:checked').length;
+            checkboxAll.prop('checked', isCheckAll);
+            renderCheckAllSubmitBtn()
+        })
+
+        //Check All Submit Button Clicked
+        {{!-- checkAllSubmitBtn.click(function (e) {
+            e.preventDefault();
+            var isSubmitable = !$(this).hasClass('disabled');
+            if(isSubmitable) {
+                containerForm.submit()
+            }
+        }) --}}
+
+        checkAllSubmitBtn.on('submit', function(e) {
+            var isSubmitable = !$(this).hasClass('disabled');
+            if(!isSubmitable) {
+                e.preventDefault();
+            }
+        })
+
+        //Re render Check all submit button
+        function renderCheckAllSubmitBtn() {
+            var checkedCount = $('input[name="lightIds[]"]:checked').length;
+            if(checkedCount > 0) {
+                checkAllSubmitBtn.removeClass('disabled');
+            } else {
+                checkAllSubmitBtn.addClass('disabled')
+            }
+        }
+    })
+</script>
