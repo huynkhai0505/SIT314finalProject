@@ -89,8 +89,7 @@ class AuthController {
             console.log(existingUser);
             if(!existingUser)
                 return res
-                        // .status(401)
-                        // .json({errorMessage: "Wrong email or password"})
+                        .render('auth/login', {message: 'Wrong username or password, please try again'})
                         .redirect('/auth/login')
     
             const passwordCorrect = await bcrypt.compare(password, existingUser.passwordHash);
@@ -99,9 +98,6 @@ class AuthController {
                         .status(401)
                         .json({errorMessage: "Password is invalid"})
 
-            // const token = jwt.sign({
-            //     user: existingUser.email,
-            // }, 'secret');
             const tokenUser = {user:  existingUser.email}
             
             const token = jwt.sign(tokenUser, 'gmndshhrjvjhsw4bnds221a');
@@ -109,7 +105,7 @@ class AuthController {
             res.cookie('token', token, {
                 httpOnly: true,
             });
-            // res.render('home1', {token: token})
+            res.render('home1', {token: token})
             res.redirect('/')
 
         } catch (error) {

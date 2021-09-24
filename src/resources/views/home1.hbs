@@ -1,5 +1,11 @@
 
-<div class="contaner">
+    {{#if token}}
+        <script type="text/javascript" async>
+            const token = '{{token}}';
+            localStorage.setItem("token", token)
+        </script>
+    {{/if}}
+
     <div class="mt-4">
         <div class="container">
             <div class="row">

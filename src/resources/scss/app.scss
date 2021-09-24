@@ -33,10 +33,10 @@ p.buildingLevel {
     margin-bottom: 16px;
 }
 
-body{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 // body{ height:100vh; margin:0; }

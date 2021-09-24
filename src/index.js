@@ -10,8 +10,9 @@ const db = require('./config/db');
 const methodOverride = require('method-override');
 const SortMiddleware = require('./app/middlewares/SortMiddleware');
 const dotenv = require('dotenv');
-const auth = require('./app/middlewares/auth');
 const cors = require('cors');
+const cookieParser = require('cookie-parser')
+const auth = require('./app/middlewares/auth')
 
 dotenv.config();
 
@@ -29,12 +30,13 @@ app.use(express.urlencoded({
 }));
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(methodOverride('_method'));
 
 //Custom middleware
 app.use(SortMiddleware)
-// app.use(/\/((?!auth).)*/, auth)
+app.use(/\/((?!auth).)*/, auth)
 
 // app.use(morgan('combined'));
 
