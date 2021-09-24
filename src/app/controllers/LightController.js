@@ -8,6 +8,7 @@ class LightController {
         Light.findOne({slug: req.params.slug})
             .then(lights => {
                 res.render('lights/show', {lights: mongooseToObject(lights)})
+                console.log(lights)
             })
             .catch(next)
     }
@@ -69,14 +70,14 @@ class LightController {
                 break;
 
             case 'update':
-                Light.findById(req.body.lightIds)
+                Light.findById({id: {$in : req.body.lightIds} })
                     .then(light => res.send({
                         light: mongooseToObject(light)
                     }))
                     .catch(next)
                 break;
             default:
-                res.json({message: "Action is invalid"})
+                res.json({message: "ACtion is invalid"})
         }
     }
 

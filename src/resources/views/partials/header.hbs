@@ -1,4 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<form id="logout-form" method="POST" action="/auth/logout"></form>
+<div class="mt-">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           <a class="navbar-brand" href="/">Light Control System</a>
           <span class="oi oi-lightbulb"></span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,19 +18,16 @@
                     Khai Huynh
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {{!-- <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/courses/create">Dang Khoa hoc</a>
-                    <div class="dropdown-divider"></div> --}}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/lights/create">Bulb Install Stimulation</a>
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/me/stored/lights">Bulb Management</a>
-                    {{!-- <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/me/stored/courses">Khoa Hoc cua toi</a> --}}
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="javascript:$('#logout-form').submit();" >Logout</a>
                     </div>
                 </li>
-
                 </ul>
             </div>
-</nav>
+    </nav>
+</div>

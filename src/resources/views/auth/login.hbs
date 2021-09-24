@@ -1,0 +1,18 @@
+{{!-- {{#if token }}
+  <script type="text/javascript" async>
+    localStorage.clear()
+  </script>
+{{/if}} --}}
+<div class="mt-4 container">
+    <form method="POST" action="/auth/checkLogin">
+        <div class="form-group">
+            <label for="exampleInputEmail1">User Name</label>
+            <input type="username" class="form-control" id="email" name="email" placeholder="User Name">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

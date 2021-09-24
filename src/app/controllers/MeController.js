@@ -1,10 +1,14 @@
 const Light = require('../models/Light');
-const {multipleMongooseToObject} = require('../../util/mongoose')
+const User = require('../models/User');
+const {multipleMongooseToObject} = require('../../util/mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 class MeController {
-
     storedLights(req, res, next) {
-
         let lightQuery = Light.find({});
         
         //Sort 
@@ -15,7 +19,7 @@ class MeController {
         }
 
         Promise.all([lightQuery, Light.countDocumentsDeleted()])
-            .then(([lights, deletedCount]) => 
+            .then(([lights, deletedCount]) =>
                 res.render('me/stored-lights', {
                     deletedCount,
                     lights: multipleMongooseToObject(lights)

@@ -3,8 +3,8 @@ const {multipleMongooseToObject} = require('../../util/mongoose')
 
 class SiteController {
     //GET /home
-    index(req, res, next) {
-        Light.find({})
+    async index(req, res, next) {
+        await Light.find({})
             .then(lights => {
                 res.render('home1', {lights: multipleMongooseToObject(lights)})
             })

@@ -14,6 +14,9 @@ h1 {
   max-width: 1000px;
   margin: auto; }
 
+p.buildingLevel {
+  font-weight: bold; }
+
 .checkbox-select-all-options {
   width: 120px;
   margin: 0 16px; }
@@ -27,7 +30,7 @@ body {
   flex-direction: column; }
 
 footer {
-  position: flex;
+  position: fixed;
   bottom: 0;
   width: 100%;
   height: 250px;

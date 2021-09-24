@@ -9,6 +9,15 @@ const route = require('./routes');
 const db = require('./config/db');
 const methodOverride = require('method-override');
 const SortMiddleware = require('./app/middlewares/SortMiddleware');
+const dotenv = require('dotenv');
+const auth = require('./app/middlewares/auth');
+const cors = require('cors');
+
+dotenv.config();
+
+app.use(cors({
+    credentials: true
+}))
 
 //Connect to DB
 db.connect();
@@ -18,12 +27,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({
     extended: true
 }));
+
 app.use(express.json());
 
 app.use(methodOverride('_method'));
 
 //Custom middleware
 app.use(SortMiddleware)
+// app.use(/\/((?!auth).)*/, auth)
 
 // app.use(morgan('combined'));
 

@@ -1,3 +1,9 @@
+    {{#if token }}
+        <script type="text/javascript" async>
+                const token = '{{token}}';
+            localStorage.setItem("token", token)
+        </script>
+    {{/if}}
 <form name="container-form" method="POST" action="/lights/handle-form-actions" class="mt-4">
     <div>
         <h3>My Bulb</h3>
@@ -15,8 +21,7 @@
         </div>
             <select class="form-control-sm form-control-sm checkbox-select-all-options" name="action" required>
                 <option value="">----Option----</option>
-                <option value="delete">Delete</option>
-                <option value="update">On</option>
+                <option value="delete">Uninstall</option>
             </select>
 
         <button class="btn btn-primary check-all-submit-btn disabled">Activate</button>
@@ -57,7 +62,7 @@
       <td>{{this.Status}}</td>
       <td> 
         <a href="/lights/{{this._id}}/edit" class="btn btn-link">Adjust</a>
-        <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-light-modal"> Delete <span class="oi oi-delete"></span></a>
+        <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-light-modal"> Uninstall <span class="oi oi-delete"></span></a>
       </td>
     </tr>
     {{else}}
@@ -87,7 +92,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button id="btn-delete-light" type="button" class="btn btn-danger">Delete</button>
+        <button id="btn-delete-light" type="button" class="btn btn-danger">Uninstall</button>
       </div>
     </div>
   </div>
@@ -133,14 +138,6 @@
         })
 
         //Check All Submit Button Clicked
-        {{!-- checkAllSubmitBtn.click(function (e) {
-            e.preventDefault();
-            var isSubmitable = !$(this).hasClass('disabled');
-            if(isSubmitable) {
-                containerForm.submit()
-            }
-        }) --}}
-
         checkAllSubmitBtn.on('submit', function(e) {
             var isSubmitable = !$(this).hasClass('disabled');
             if(!isSubmitable) {

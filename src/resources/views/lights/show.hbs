@@ -2,12 +2,15 @@
     <div class="row">
         <div class="col-lg-3">
             <h1>Building Level: {{lights.buildingLevel}}</h1>
+            <h2>Bulb Status: {{lights.Status}}</h2>
         </div>
 
         <div class="col-lg-9">
-            <h2> {{lights.name}} </h2>
-            <iframe width="800" height="400" src="https://www.youtube.com/embed/{{lights.videoId}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <p> {{lights.description}} </p>
+            <h1> {{lights.name}} </h1>
+            <div class="mt-4">
+                <iframe width="800" height="400" src="https://www.youtube.com/embed/{{lights.videoId}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p> {{lights.description}} </p>
+            </div>
         </div>
     </div>
 </div>
